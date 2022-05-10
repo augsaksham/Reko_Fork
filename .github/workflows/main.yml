@@ -1,4 +1,3 @@
-# This is a basic workflow to help you get started with Actions
 
 name: CI
 
@@ -8,38 +7,10 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ dev ]
+    branches: [ dev,main ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    strategy:
-      matrix:
-        os: [ubuntu-18.04, ubuntu-20.04]
-        version: [3.6, 3.7, 3.8]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/setup-python@v3.1.2
-        with:
-          python-version: ${{ matrix.version }}
-          
-          # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-          # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-            echo Add other actions to build,
-            echo test, and deploy your project.
-            echo 1. Python Version
-            python --version
-  # label of the container job
-  postgres-job:
+  build-job:
     strategy:
       matrix:
         os: [ubuntu-18.04, ubuntu-20.04]
@@ -74,13 +45,16 @@ jobs:
           --health-retries 5
     steps:
 
+      #Installing PostgressSQL client
         
       - name: Install PostgreSQL client
         run: |
           sudo apt-get update
           sudo apt-get install --yes postgresql-client
           echo postgree installed 
-      # queries database with postgres client
+
+      # Setting Up Postgres Database
+
       - name: Setup Database database
         run: |
           echo creating database
@@ -95,12 +69,11 @@ jobs:
           echo postgres sttted up
       
         env:
-          # postgress password is required; alternatively, you can run:
-          # `PGPASSWORD=postgres_password psql ...`
+          # Setting up POSRGRES Enviorment
           POSTGRES_HOST: localhost
           POSTGRES_USER: postgres_db
           POSTGRES_PASSWORD: postgres
-      # The default PostgreSQL port
+      
           POSTGRES_PORT: 5432
           PGPASSWORD: postgres
 
@@ -115,6 +88,8 @@ jobs:
           path: ~/.cache/pip
           key: ${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
 
+      # Dependency Installation 
+
       - name: Install Dependencies
         run: |
           echo python version = 
@@ -125,6 +100,9 @@ jobs:
           echo installed dependencies
 
       - uses: actions/checkout@v3
+
+      # Downloading Test Files
+
       - name: Download Files
         env:
           DJANGO_SETTINGS_MODULE: Rekognition.settings
@@ -147,6 +125,7 @@ jobs:
           cd ../..
           export DJANGO_SETTINGS_MODULE="Rekognition.settings"
 
+      # Running Tests
 
       - name: Run Tests
         env:
