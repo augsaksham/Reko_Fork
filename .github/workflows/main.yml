@@ -148,7 +148,6 @@ jobs:
 
       - name: Run Tests
         run: |
-          flake8 .
           coverage run -m tests.test_views
           coverage run -m tests.test_models
           echo Test Run Sucessful
