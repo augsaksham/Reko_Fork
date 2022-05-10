@@ -83,7 +83,10 @@ jobs:
 
       # queries database with postgres client
       - name: Query database
-        run: psql -h postgres -d postgres_db -U postgres_user -c 'SELECT 1;'
+        run: |
+          psql -h postgres -U postgres_db -c "CREATE DATABASE pmr"
+          echo database created
+      
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
