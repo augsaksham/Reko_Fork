@@ -94,7 +94,7 @@ jobs:
           psql -h localhost -U postgres_db -c "ALTER ROLE admin SET default_transaction_isolation TO 'read committed'"
           psql -h localhost -U postgres_db -c "ALTER ROLE admin SET timezone TO 'UTC'"
           psql -h localhost -U postgres_db -c "ALTER USER admin CREATEDB"
-          psql -h localhost U postgres_db -c "ALTER DATABASE pmr OWNER TO admin"
+          psql -h localhost -U postgres_db -c "ALTER DATABASE pmr OWNER TO admin"
           echo postgres sttted up
       
         env:
