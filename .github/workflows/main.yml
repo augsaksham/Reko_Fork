@@ -86,7 +86,6 @@ jobs:
       # queries database with postgres client
       - name: Query database
         run: |
-          `PGPASSWORD=postgres_password psql ...`
           echo creating database
           psql -h localhost -U postgres_db -c "CREATE DATABASE pmr"
           echo database created
