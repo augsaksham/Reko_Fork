@@ -75,15 +75,7 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3.1.2
-        with:
-          python-version: 3.6
-      - name: Install Dependencies
-        run: |
-          pip3 install --upgrade pip
-          pip3 install -r requirements.txt
-          echo installed dependencies
+
         
       - name: Install PostgreSQL client
         run: |
@@ -94,6 +86,7 @@ jobs:
       # queries database with postgres client
       - name: Query database
         run: |
+          `PGPASSWORD=postgres_password psql ...`
           echo creating database
           psql -h localhost -U postgres_db -c "CREATE DATABASE pmr"
           echo database created
@@ -102,6 +95,7 @@ jobs:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
           POSTGRES_HOST: localhost
+          POSTGRES_USER: postgres_db
           POSTGRES_PASSWORD: postgres
       # The default PostgreSQL port
           POSTGRES_PORT: 5432
