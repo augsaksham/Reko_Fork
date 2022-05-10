@@ -84,7 +84,8 @@ jobs:
       # queries database with postgres client
       - name: Query database
         run: |
-          psql -h postgres -U postgres_db -c "CREATE DATABASE pmr"
+          echo creating database
+          psql -h localhost -U postgres_db -c "CREATE DATABASE pmr"
           echo database created
       
         env:
