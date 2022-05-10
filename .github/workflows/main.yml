@@ -38,7 +38,6 @@ jobs:
             echo test, and deploy your project.
             echo 1. Python Version
             python --version
-
   # label of the container job
   postgres-job:
     strategy:
@@ -63,7 +62,7 @@ jobs:
           # optional (defaults to `5432`)
           POSTGRES_PORT: 5432
           # optional (defaults to `postgres`)
-          POSTGRES_USER: postgres_user
+          POSTGRES_USER: postgres_db
         ports:
           # maps tcp port 5432 on service container to the host
           - 5432:5432
@@ -73,38 +72,20 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3.1.2
-        with:
-          python-version: 3.6
 
-      - uses: actions/cache@v3.0.2
-        with:
-          path: ~/.cache/pip
-          key: ${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
-
-          
-      - name: Install Dependencies
-        run: |
-          pip3 install --upgrade pip
-          pip3 install -r requirements.txt
-          echo installed dependencies
-
-
+        
       - name: Install PostgreSQL client
         run: |
           sudo apt-get update
           sudo apt-get install --yes postgresql-client
           echo postgree installed 
-
-
       # queries database with postgres client
-      - name: Setup Database 
+      - name: Setup Database database
         run: |
           echo creating database
           psql -h localhost -U postgres_db -c "CREATE DATABASE pmr"
+          echo database created
           psql -h localhost -U postgres_db -c "CREATE USER admin WITH PASSWORD 'admin'"
           psql -h localhost -U postgres_db -c "ALTER ROLE admin SET client_encoding TO 'utf8'"
           psql -h localhost -U postgres_db -c "ALTER ROLE admin SET default_transaction_isolation TO 'read committed'"
@@ -122,6 +103,7 @@ jobs:
       # The default PostgreSQL port
           POSTGRES_PORT: 5432
           PGPASSWORD: postgres
+
       
 
           
