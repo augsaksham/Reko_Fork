@@ -78,8 +78,9 @@ jobs:
     steps:
       - name: Install PostgreSQL client
         run: |
-          apt-get update
-          apt-get install --yes postgresql-client
+          sudo apt-get update
+          sudo apt-get install --yes postgresql-client
+          echo postgress installed
 
       # queries database with postgres client
       - name: Query database
