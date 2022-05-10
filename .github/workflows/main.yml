@@ -59,7 +59,7 @@ jobs:
           # optional (defaults to `postgres`)
           POSTGRES_DB: postgres_db
           # required
-          POSTGRES_PASSWORD: postgres_password
+          POSTGRES_PASSWORD: postgres
           # optional (defaults to `5432`)
           POSTGRES_PORT: 5432
           # optional (defaults to `postgres`)
@@ -75,6 +75,15 @@ jobs:
           --health-retries 5
 
     steps:
+      - uses: actions/setup-python@v3.1.2
+        with:
+          python-version: 3.6
+      - name: Install Dependencies
+        run: |
+          pip3 install --upgrade pip
+          pip3 install -r requirements.txt
+          echo installed dependencies
+        
       - name: Install PostgreSQL client
         run: |
           sudo apt-get update
@@ -91,7 +100,9 @@ jobs:
         env:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
-          PGPASSWORD: postgres_password
+          POSTGRES_HOST: localhost
+      # The default PostgreSQL port
+          POSTGRES_PORT: 5432
 
       
 
