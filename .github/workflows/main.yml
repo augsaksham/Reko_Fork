@@ -126,6 +126,8 @@ jobs:
 
       - uses: actions/checkout@v3
       - name: Download Files
+        env:
+          DJANGO_SETTINGS_MODULE: Rekognition.settings
         run: |
           mkdir tests/testdata
           cd tests/testdata
@@ -147,6 +149,9 @@ jobs:
 
 
       - name: Run Tests
+        env:
+          DJANGO_SETTINGS_MODULE: Rekognition.settings
+
         run: |
           coverage run -m tests.test_views
           coverage run -m tests.test_models
