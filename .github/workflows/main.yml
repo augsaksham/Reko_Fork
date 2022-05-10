@@ -41,7 +41,6 @@ jobs:
 
   # label of the container job
   postgres-job:
-    needs : [build]
     strategy:
       matrix:
         os: [ubuntu-18.04, ubuntu-20.04]
@@ -78,8 +77,9 @@ jobs:
     steps:
       - name: Install PostgreSQL client
         run: |
-          apt-get update
-          apt-get install --yes postgresql-client
+          sudo apt-get update
+          sudo apt-get install --yes postgresql-client
+          echo postgree installed 
 
       # queries database with postgres client
       - name: Query database
