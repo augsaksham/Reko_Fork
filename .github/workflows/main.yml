@@ -63,7 +63,7 @@ jobs:
           # optional (defaults to `5432`)
           POSTGRES_PORT: 5432
           # optional (defaults to `postgres`)
-          POSTGRES_USER: postgres_user
+          POSTGRES_USER: postgres_db
         ports:
           # maps tcp port 5432 on service container to the host
           - 5432:5432
@@ -102,6 +102,7 @@ jobs:
           # postgress password is required; alternatively, you can run:
           # `PGPASSWORD=postgres_password psql ...`
           POSTGRES_HOST: localhost
+          POSTGRES_PASSWORD: postgres
       # The default PostgreSQL port
           POSTGRES_PORT: 5432
 
