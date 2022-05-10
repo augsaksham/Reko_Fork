@@ -85,8 +85,8 @@ jobs:
 
       - uses: actions/cache@v3.0.2
         with:
-          path: ~/.cache/pip
-          key: ${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
+          path: ${{ env.pythonLocation }}
+          key: ${{ env.pythonLocation }}-${{ hashFiles('setup.py') }}-${{ hashFiles('requirements.txt') }}
 
       # Dependency Installation 
 
@@ -98,8 +98,6 @@ jobs:
           pip3 install --upgrade pip
           pip3 install -r requirements.txt
           echo installed dependencies
-
-      - uses: actions/checkout@v3
 
       # Downloading Test Files
 
