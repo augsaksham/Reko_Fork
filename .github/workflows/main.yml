@@ -38,6 +38,68 @@ jobs:
             echo test, and deploy your project.
             echo 1. Python Version
             python --version
+
+  # label of the container job
+  postgres-job:
+    needs : [build]
+    strategy:
+      matrix:
+        os: [ubuntu-18.04, ubuntu-20.04]
+        version: [3.6, 3.7, 3.8]
+    runs-on: ${{ matrix.os }}
+
+    # service containers to run with `postgres-job`
+    services:
+      # label used to access the service container
+      postgres:
+        # Docker Hub image
+        image: postgres:latest
+        # service environment variables
+        # `POSTGRES_HOST` is `postgres`
+        env:
+          # optional (defaults to `postgres`)
+          POSTGRES_DB: pmr
+          # required
+          POSTGRES_PASSWORD: admin
+          # optional (defaults to `5432`)
+          POSTGRES_PORT: 5432
+          # optional (defaults to `postgres`)
+          POSTGRES_USER: admin
+        ports:
+          # maps tcp port 5432 on service container to the host
+          - 5432:5432
+        # set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Install PostgreSQL client
+        run: |
+          apt-get update
+          apt-get install --yes postgresql-client
+
+      # queries database with postgres client
+      - name: Query database
+        run: |
+          psql -U postgres -c "CREATE DATABASE pmr"
+          psql -U postgres -c "CREATE USER admin WITH PASSWORD 'admin'"
+          psql -U postgres -c "ALTER ROLE admin SET client_encoding TO 'utf8'"
+          psql -U postgres -c "ALTER ROLE admin SET default_transaction_isolation TO 'read committed'"
+          psql -U postgres -c "ALTER ROLE admin SET timezone TO 'UTC'"
+          psql -U postgres -c "ALTER USER admin CREATEDB"
+          psql -U postgres -c "ALTER DATABASE pmr OWNER TO admin"
+
+          echo Completed Task
+        env:
+          # postgress password is required; alternatively, you can run:
+          # `PGPASSWORD=postgres_password psql ...`
+          PGPASSWORD: admin
+
+      
+
           
           
           
