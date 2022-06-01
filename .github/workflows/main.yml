@@ -135,6 +135,7 @@ jobs:
           coverage report -m
           coverage run -m tests.test_models
           echo test.test_models report
+          coverage report -m
           echo Test Run Sucessful
 
 
