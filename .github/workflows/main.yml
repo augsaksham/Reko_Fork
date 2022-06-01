@@ -131,8 +131,8 @@ jobs:
 
         run: |
           coverage run -m tests.test_views
-	  echo test.test_views report 
-	  coverage report -m
+          echo test.test_views report 
+          coverage report -m
           coverage run -m tests.test_models
           echo test.test_models report
           echo Test Run Sucessful
