@@ -52,7 +52,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install --yes postgresql-client
           echo postgree installed 
-
       # Setting Up Postgres Database
 
       - name: Setup Database database
@@ -98,7 +97,6 @@ jobs:
           pip3 install --upgrade pip
           pip3 install -r requirements.txt
           echo installed dependencies
-
       # Downloading Test Files
 
       - name: Download Files
@@ -122,7 +120,6 @@ jobs:
           wget https://www.dropbox.com/s/ij5hj4hznczvfcw/text.mp4
           cd ../..
           export DJANGO_SETTINGS_MODULE="Rekognition.settings"
-
       # Running Tests
 
       - name: Run Tests
@@ -135,19 +132,5 @@ jobs:
           coverage report -m
           coverage run -m tests.test_models
           echo test.test_models report
+          coverage report -m
           echo Test Run Sucessful
-
-
-
-
-
-      
-
-          
-          
-          
-          
-          
-          
-          
-          
