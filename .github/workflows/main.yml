@@ -100,7 +100,6 @@ jobs:
           sudo apt-get install python3-dev
           pip3 install --upgrade pip
           pip3 install -r requirements.txt
-          pip3 install gdown
           pip3 install tensorflow-serving-api==2.5.2
           echo installed dependencies
       # Downloading Test Files
@@ -121,7 +120,7 @@ jobs:
           cd ..
           mkdir tfs
           cd tfs
-          gdown 1VMIvPZQhDgsyj96nyJOzUETohwwiLKRh
+          wget --load-cookies /tmp/cookies.txt "drive.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'drive.google.com/uc?export=download&id=1VMIvPZQhDgsyj96nyJOzUETohwwiLKRh' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1VMIvPZQhDgsyj96nyJOzUETohwwiLKRh" -O tfs.zip && rm -rf /tmp/cookies.txt
           unzip tfs.zip
           rm tfs.zip
           cd ../../..
