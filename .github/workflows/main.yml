@@ -100,7 +100,8 @@ jobs:
           sudo apt-get install python3-dev
           pip3 install --upgrade pip
           pip3 install -r requirements.txt
-          pip install tensorflow-serving-api==2.5.2
+          pip3 install gdown
+          pip3 install tensorflow-serving-api==2.5.2
           echo installed dependencies
       # Downloading Test Files
 
@@ -120,6 +121,9 @@ jobs:
           cd ..
           mkdir tfs
           cd tfs
+          gdown 1VMIvPZQhDgsyj96nyJOzUETohwwiLKRh
+          unzip tfs.zip
+          rm tfs.zip
           cd ../../..
           cd data
           mkdir text_reco
