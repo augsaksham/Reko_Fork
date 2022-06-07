@@ -120,9 +120,6 @@ jobs:
           cd ..
           mkdir tfs
           cd tfs
-          wget --load-cookies /tmp/cookies.txt "drive.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'drive.google.com/uc?export=download&id=1VMIvPZQhDgsyj96nyJOzUETohwwiLKRh' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1VMIvPZQhDgsyj96nyJOzUETohwwiLKRh" -O tfs.zip && rm -rf /tmp/cookies.txt
-          unzip tfs.zip
-          rm tfs.zip
           cd ../../..
           cd data
           mkdir text_reco
