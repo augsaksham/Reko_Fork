@@ -272,6 +272,8 @@ jobs:
          set -x
          docker version
          docker run --rm hello-world
+         sudo apt chmod 666 /var/run/docker.sock
+         docker pull tensorflow/serving:nightly-devel
       
       
 
