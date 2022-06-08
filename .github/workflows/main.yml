@@ -8,7 +8,7 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ dev,main ]
-
+  
 jobs:
   build-job:
     strategy:
@@ -103,15 +103,6 @@ jobs:
           pip3 install tensorflow-serving-api==2.5.2
           echo installed dependencies
       # Downloading Test Files
-      
-      - name: Docker setup
-      - uses: docker-practice/actions-setup-docker@master
-      - run: |
-          set -x
-
-          docker version
-
-          docker run --rm hello-world
 
       - name: Download Files
         env:
@@ -153,3 +144,15 @@ jobs:
           echo test.test_models report
           coverage report -m
           echo Test Run Sucessful
+          
+          
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: docker-practice/actions-setup-docker@master
+    - run: |
+        set -x
+
+        docker version
+
+        docker run --rm hello-world
