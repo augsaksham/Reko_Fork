@@ -136,7 +136,10 @@ jobs:
           DJANGO_SETTINGS_MODULE: Rekognition.settings
 
         run: |
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
           sudo apt-get update
+          sudo apt-get install gcc-4.9
+          sudo apt-get install --only-upgrade libstdc++6sudo apt-get update
           sudo apt-get install libstdc++6
           tensorflow_model_server --port=8500 --rest_api_port=8501 --model_config_file=./corelib/model/tfs/model_volume/configs/models.conf
           coverage run -m tests.test_views
