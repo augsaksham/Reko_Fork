@@ -136,7 +136,7 @@ jobs:
          docker version
          docker run --rm hello-world
          docker pull tensorflow/serving:nightly-devel
-         docker run -it -p 8500:8500 -p 8501:8501 -v ./corelib/model/tfs/model_volume:/home/ tensorflow/serving:nightly-devel
+         docker run -p 8500:8500 -p 8501:8501 -v ./corelib/model/tfs/model_volume:/home/ tensorflow/serving:nightly-devel
          tensorflow_model_server --port=8500 --rest_api_port=8501 --model_config_file=/home/configs/models.conf
 
            
