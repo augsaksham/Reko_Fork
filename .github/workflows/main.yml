@@ -119,12 +119,9 @@ jobs:
           cd ..
           mkdir tfs
           cd tfs
-          wget https://www.dropbox.com/s/fuyzsf3qgebdlvl/models.zip?dl=1 -O models.zip
-          unzip models.zip
-          rm models.zip
+          wget https://www.dropbox.com/s/9hpt73ipfhwi4s2/tfs.zip?dl=1 -O tfs.zip
           unzip tfs.zip
           rm tfs.zip
-          rm 2017.zip
           cd ../../..
           cd data
           mkdir text_reco
@@ -145,6 +142,7 @@ jobs:
          echo {pwd}
          docker run -p 8500:8500 -p 8501:8501 -v {pwd}:/home/ tensorflow/serving:nightly-devel
          tensorflow_model_server --port=8500 --rest_api_port=8501 --model_config_file=/home/configs/models.conf
+         export DJANGO_SETTINGS_MODULE="Rekognition.settings"
          
 
            
