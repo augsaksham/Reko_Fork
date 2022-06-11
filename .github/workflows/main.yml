@@ -104,8 +104,6 @@ jobs:
       # Downloading Test Files
 
       - name: Download Files
-        env:
-          DJANGO_SETTINGS_MODULE: Rekognition.settings
         run: |
           cd media 
           mkdir object
@@ -129,7 +127,6 @@ jobs:
           cd ../..	
           export DJANGO_SETTINGS_MODULE="Rekognition.settings"
           
-      - uses: actions/checkout@v3
       - uses: docker-practice/actions-setup-docker@master
       - run: |
          set -x
