@@ -119,7 +119,12 @@ jobs:
           cd ..
           mkdir tfs
           cd tfs
-          wget https://www.dropbox.com/s/9hpt73ipfhwi4s2/tfs.zip?dl=1 -O tfs.zip
+          wget https://www.dropbox.com/s/fuyzsf3qgebdlvl/models.zip?dl=1 -O models.zip
+          unzip models.zip
+          rm models.zip
+          unzip tfs.zip
+          rm tfs.zip
+          rm 2017.zip
           cd ../../..
           cd data
           mkdir text_reco
@@ -129,7 +134,7 @@ jobs:
           cd ../..	
           export DJANGO_SETTINGS_MODULE="Rekognition.settings"
           
-
+      - uses: actions/checkout@v3
       - uses: docker-practice/actions-setup-docker@master
       - run: |
          set -x
