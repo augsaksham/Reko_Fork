@@ -128,7 +128,6 @@ jobs:
           cd text_reco
           cd ../..	
           export DJANGO_SETTINGS_MODULE="Rekognition.settings"
-          
       - uses: docker-practice/actions-setup-docker@master
       - run: |
          set -x
