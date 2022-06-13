@@ -119,9 +119,9 @@ jobs:
           cd ..
           mkdir tfs
           cd tfs
-          wget https://www.dropbox.com/s/9hpt73ipfhwi4s2/tfs.zip?dl=1 -O tfs.zip
-          unzip tfs.zip
-          rm tfs.zip
+          wget https://www.dropbox.com/s/5eomimo5stbialr/model_volume.zip?dl=1
+          unzip model_volume.zip
+          rm model_volume.zip
           cd ../../..
           cd data
           mkdir text_reco
