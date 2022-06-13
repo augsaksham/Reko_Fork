@@ -116,7 +116,7 @@ jobs:
           cd ..
           mkdir tfs
           cd tfs
-          wget https://www.dropbox.com/s/k80wzvuly0velum/model_volume_tw.zip?dl=1 -O model_volume_tw.zip
+          wget https://www.dropbox.com/s/k80wzvuly0velum/model_volume_tw.zip
           unzip model_volume_tw.zip
           rm model_volume_tw.zip
           cd ../../..
