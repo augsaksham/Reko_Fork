@@ -116,9 +116,9 @@ jobs:
           cd ..
           mkdir tfs
           cd tfs
-          wget https://www.dropbox.com/s/5eomimo5stbialr/model_volume.zip?dl=0 -Omodel_volume.zip
-          unzip model_volume.zip
-          rm model_volume.zip
+          wget --load-cookies /tmp/cookies.txt "https://drive.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://drive.google.com/uc?export=download&id=1qO7iRlC5kkDB8onK9LJWkRLGf75xxol3' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1qO7iRlC5kkDB8onK9LJWkRLGf75xxol3" -O module.zip && rm -rf /tmp/cookies.txt
+          unzip module.zip
+          rm module.zip
           cd ../../..
           cd data
           mkdir text_reco
