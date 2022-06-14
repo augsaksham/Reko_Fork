@@ -131,7 +131,7 @@ jobs:
          docker run --rm hello-world
          docker pull tensorflow/serving:nightly-devel
          echo $(pwd)
-         docker run -it -p 8500:8500 -p 8501:8501 -v $(pwd)/corelib/model/tfs/model_volume:/home/runner/work/tensorflow/serving:nightly-devel
+         docker run -t --rm -p 8501:8501 \-v "$(pwd)/corelib/model/tfs/model_volume:/home/" tensorflow/serving \--model_config_file=/home/configs/models.conf \--model_config_file_poll_wait_seconds=60         
          export DJANGO_SETTINGS_MODULE="Rekognition.settings"
          
 
