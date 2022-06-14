@@ -116,7 +116,7 @@ jobs:
           cd ..
           mkdir tfs
           cd tfs
-          wget https://www.dropbox.com/s/k80wzvuly0velum/model_volume_tw.zip
+          wget https://www.dropbox.com/s/k80wzvuly0velum/model_volume_tw.zip -O model_volume_tw.zip
           unzip model_volume_tw.zip
           rm model_volume_tw.zip
           cd ../../..
@@ -132,9 +132,9 @@ jobs:
          docker run --rm hello-world
          docker pull tensorflow/serving:nightly-devel
          cd corelib/model/tfs/model_volume
-         echo $pwd
-         docker run -it -p 8500:8500 -p 8501:8501 -v &(pwd)/corelib/model/tfs/model_volume:/home/ tensorflow/serving:nightly-devel
-         tensorflow_model_server --port=8500 --rest_api_port=8501 --model_config_file=/home/configs/models.conf
+         echo $(pwd)
+         echo ls
+         docker run -it -p 8500:8500 -p 8501:8501 -v &(pwd)/Rekognition/corelib/model/tfs/model_volume:/home/ tensorflow/serving:nightly-devel
          export DJANGO_SETTINGS_MODULE="Rekognition.settings"
          
 
