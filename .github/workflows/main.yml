@@ -132,7 +132,7 @@ jobs:
          docker pull tensorflow/serving:nightly-devel
          cd corelib/model/tfs/model_volume
          echo $(pwd)
-         docker run -it -p 8500:8500 -p 8501:8501 -v $(pwd)/corelib/model/tfs/model_volume:/home/tensorflow/serving:nightly-devel
+         docker run -it -p 8500:8500 -p 8501:8501 -v $(pwd)/corelib/model/tfs/model_volume:/home/runner/work/tensorflow/serving:nightly-devel
          export DJANGO_SETTINGS_MODULE="Rekognition.settings"
          
 
