@@ -116,7 +116,7 @@ jobs:
           cd ..
           mkdir tfs
           cd tfs
-          wget --load-cookies /tmp/cookies.txt "https://drive.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://drive.google.com/uc?export=download&id=1qO7iRlC5kkDB8onK9LJWkRLGf75xxol3' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1qO7iRlC5kkDB8onK9LJWkRLGf75xxol3" -O module.zip && rm -rf /tmp/cookies.txt
+          wget --load-cookies /tmp/cookies.txt "https://drive.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://drive.google.com/uc?export=download&id=1wsCro4wEJY71KeGHqmxJz2V4qUWAEZBr' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1wsCro4wEJY71KeGHqmxJz2V4qUWAEZBr" -O module.zip && rm -rf /tmp/cookies.txt
           unzip module.zip
           rm module.zip
           cd ../../..
@@ -132,7 +132,7 @@ jobs:
          docker pull tensorflow/serving:nightly-devel
          cd corelib/model/tfs/model_volume
          echo $(pwd)
-         docker run -it -p 8500:8500 -p 8501:8501 -v &(pwd)/corelib/model/tfs/model_volume:/home/ tensorflow/serving:nightly-devel
+         docker run -it -p 8500:8500 -p 8501:8501 -v $(pwd)/corelib/model/tfs/model_volume:/home/tensorflow/serving:nightly-devel
          export DJANGO_SETTINGS_MODULE="Rekognition.settings"
          
 
