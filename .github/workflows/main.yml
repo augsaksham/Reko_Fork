@@ -126,13 +126,15 @@ jobs:
           cd text_reco
           cd ../..	
           export DJANGO_SETTINGS_MODULE="Rekognition.settings"
+      - uses: BerniWittmann/background-server-action@latest
       - run: |
          set -x
          docker version
          docker run --rm hello-world
          docker pull tensorflow/serving:nightly-devel
          echo $(pwd)
-         docker run -t -p 8500:8500 -p 8501:8501 -v /home/runner/work/Reko_Fork/Reko_Fork/corelib/model/tfs/model_volume:/home/ tensorflow/serving --model_config_file=/home/configs/models.conf
+         command: echo hogaya
+         start: docker run -t -p 8500:8500 -p 8501:8501 -v /home/runner/work/Reko_Fork/Reko_Fork/corelib/model/tfs/model_volume:/home/ tensorflow/serving --model_config_file=/home/configs/models.conf
          export DJANGO_SETTINGS_MODULE="Rekognition.settings"
          
 
