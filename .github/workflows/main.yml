@@ -144,6 +144,7 @@ jobs:
           cd ../..	
           export DJANGO_SETTINGS_MODULE="Rekognition.settings"
       - run: |
+         export DJANGO_SETTINGS_MODULE="Rekognition.settings"
          set -x
          docker version
          docker run --rm hello-world
@@ -157,7 +158,7 @@ jobs:
          sleep 10
          echo done all
          python -m pytest --import-mode=append /home/runner/work/Reko_Fork/Reko_Fork/tests/
-         export DJANGO_SETTINGS_MODULE="Rekognition.settings"
+         
          
 
            
