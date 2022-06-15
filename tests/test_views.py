@@ -3,7 +3,7 @@ from django.core.files import File
 from django.conf import settings
 from django.core.files.uploadedfile import SimpleUploadedFile
 from rest_framework import status
-settings.configure()
+# settings.configure()
 from rest_framework.test import APIClient  # noqa: E402
 
 
