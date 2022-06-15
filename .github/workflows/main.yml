@@ -106,16 +106,6 @@ jobs:
 
       - name: Download Files
         run: |
-          cd media 
-          mkdir object
-          cd ..
-          cd corelib/model
-          mkdir facenet
-          cd facenet
-          wget https://www.dropbox.com/s/jm8grrifh5yk7is/2017.zip?dl=1 -O 2017.zip
-          unzip 2017.zip
-          rm 2017.zip
-          cd ..
           mkdir tests/testdata
           cd tests/testdata
           wget https://www.dropbox.com/s/1bnxg32zvgjv0pl/compareImage.jpeg
@@ -132,6 +122,16 @@ jobs:
           wget https://www.dropbox.com/s/3w5ghr5jj6opr58/scene1.mp4
           wget https://www.dropbox.com/s/ij5hj4hznczvfcw/text.mp4
           cd ../..
+          cd media 
+          mkdir object
+          cd ..
+          cd corelib/model
+          mkdir facenet
+          cd facenet
+          wget https://www.dropbox.com/s/jm8grrifh5yk7is/2017.zip?dl=1 -O 2017.zip
+          unzip 2017.zip
+          rm 2017.zip
+          cd ..
           mkdir tfs
           cd tfs
           wget --load-cookies /tmp/cookies.txt "https://drive.google.com/uc?export=download&confirm=$(wget --quiet --save-cookies /tmp/cookies.txt --keep-session-cookies --no-check-certificate 'https://drive.google.com/uc?export=download&id=1qO7iRlC5kkDB8onK9LJWkRLGf75xxol3' -O- | sed -rn 's/.*confirm=([0-9A-Za-z_]+).*/\1\n/p')&id=1qO7iRlC5kkDB8onK9LJWkRLGf75xxol3" -O module.zip && rm -rf /tmp/cookies.txt
