@@ -126,7 +126,7 @@ jobs:
           cd text_reco
           cd ../..	
           export DJANGO_SETTINGS_MODULE="Rekognition.settings"
-      - uses: BerniWittmann/background-server-action@latest
+      - uses: BerniWittmann/background-server-action@v1.0.4
       - run: |
          set -x
          docker version
