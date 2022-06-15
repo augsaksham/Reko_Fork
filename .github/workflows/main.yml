@@ -43,6 +43,7 @@ jobs:
           --health-retries 5
     steps:
 
+
       #Installing PostgressSQL client
         
       - name: Install PostgreSQL client
