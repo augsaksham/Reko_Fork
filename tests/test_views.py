@@ -105,9 +105,9 @@ class TestNsfwVideo(TestCase):
         super(TestNsfwVideo, self).setUp()
         self.client = APIClient()
         file1 = File(open('tests/testdata/test3.mp4', 'rb'))
-        self.uploaded_file1 = SimpleUploadedFile("temp1.png", file1.read(), content_type='multipart/form-data')
+        self.uploaded_file1 = SimpleUploadedFile("temp1.mp4", file1.read(), content_type='multipart/form-data')
         file2 = File(open('tests/testdata/test4.mp4', 'rb'))
-        self.uploaded_file2 = SimpleUploadedFile("temp2.jpeg", file2.read(), content_type='multipart/form-data')
+        self.uploaded_file2 = SimpleUploadedFile("temp2.jmp4", file2.read(), content_type='multipart/form-data')
 
     def test_post(self):
 
@@ -124,9 +124,9 @@ class TestEmbedding(TestCase):
         super(TestEmbedding, self).setUp()
         self.client = APIClient()
         file1 = File(open('tests/testdata/t1.png', 'rb'))
-        self.uploaded_file1 = SimpleUploadedFile("temp1.png", file1.read(), content_type='multipart/form-data')
+        self.uploaded_file1 = SimpleUploadedFile("compareImage.jpeg", file1.read(), content_type='multipart/form-data')
         file2 = File(open('tests/testdata/t2.jpeg', 'rb'))
-        self.uploaded_file2 = SimpleUploadedFile("temp2.jpeg", file2.read(), content_type='multipart/form-data')
+        self.uploaded_file2 = SimpleUploadedFile("compareImage.jpeg", file2.read(), content_type='multipart/form-data')
 
     def test_post(self):
 
