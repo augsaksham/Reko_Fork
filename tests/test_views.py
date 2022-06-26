@@ -106,7 +106,7 @@ class TestNsfwVideo(TestCase):
         self.client = APIClient()
         file1 = File(open('tests/testdata/test3.mp4', 'rb'))
         self.uploaded_file1 = SimpleUploadedFile("temp1.png", file1.read(), content_type='multipart/form-data')
-        file2 = File(open('tests/testdata/test4.mp4.jpeg', 'rb'))
+        file2 = File(open('tests/testdata/test4.mp4', 'rb'))
         self.uploaded_file2 = SimpleUploadedFile("temp2.jpeg", file2.read(), content_type='multipart/form-data')
 
     def test_post(self):
