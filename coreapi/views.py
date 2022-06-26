@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from rest_framework import views, status
 from rest_framework.response import Response
+from corelib.facenet.utils import handle_uploaded_file
+from Rekognition.settings import MEDIA_ROOT
+import os
 from corelib.facenet.utils import (getnewuniquefilename)
 from corelib.main_api import (facerecogniseinimage, facerecogniseinvideo,
                               createembedding, process_streaming_video,
@@ -16,6 +19,8 @@ from rest_framework.parsers import MultiPartParser, FormParser
 import asyncio
 from threading import Thread
 import random
+import tracemalloc
+import 
 
 
 logger = RekogntionLogger(name="view")
@@ -408,10 +413,47 @@ def asyncthread(request, filename):
 
 class AsyncVideoFr(views.APIView):
     def post(self, request):
+        tracemalloc.start()
+        start = time.time()
         filename = getnewuniquefilename(request)
-        thread = Thread(target=asyncthread, args=(request, filename))
+        file_path = os.path.join(MEDIA_ROOT, 'videos', filename)
+        input_file = request.FILES['file']
+        handle_uploaded_file(input_file, file_path)
+        thread = ThreadWithReturnValue(target=facerecogniseinvideo, args=(input_file, filename))
         thread.start()
-        return Response(str(filename.split('.')[0]), status=status.HTTP_200_OK)
+        result = thread.join()
+        end = time.time()
+        logger.info(msg="Time For Prediction = " + str(int(end - start)))
+        result['Time'] = int(end - start)
+        result["Memory"] = (tracemalloc.get_traced_memory()[1] - tracemalloc.get_traced_memory()[0]) * 0.001
+        logger.info(msg="Memory Used = " + str((tracemalloc.get_traced_memory()[1] - tracemalloc.get_traced_memory()[0]) * 0.001))
+        tracemalloc.stop()
+        if "Error" not in result:
+            return Response(result, status=status.HTTP_200_OK)
+        else:
+            if (result["Error"] == 'An HTTP error occurred.'):
+                return Response(result, status=status.HTTP_400_BAD_REQUEST)
+            elif (result["Error"] == 'A Connection error occurred.'):
+                return Response(result, status=status.HTTP_503_SERVICE_UNAVALIABLE)
+            elif (result["Error"] == 'The request timed out.'):
+                return Response(result, status=status.HTTP_408_REQUEST_TIMEOUT)
+            elif (result["Error"] == 'Bad URL'):
+                return Response(result, status=status.HTTP_400_BAD_REQUEST)
+            elif (result["Error"] == 'Face Recongiton(Video) Not Working'):
+                return Response(result, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            elif (result["Error"] == 'The media format of the requested data is not supported by the server'):
+                return Response(result, status=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
+            elif (result["Error"] == 'A JSON error occurred.'):
+                return Response(result, status=status.HTTP_204_NO_CONTENT)
+            elif (result["Error"] == 'A proxy error occurred.'):
+                return Response(result, status=status.HTTP_407_PROXY_AUTHENTICATION_REQUIRED)
+            elif (result["Error"] == 'The header value provided was somehow invalid.'):
+                return Response(result, status=status.HTTP_411_LENGTH_REQUIRED)
+            elif (result["Error"] == 'The request timed out while trying to connect to the remote server.'):
+                return Response(result, status=status.HTTP_504_GATEWAY_TIMEOUT)
+            else:
+                return Response(result, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class StreamVideoFr(views.APIView):
@@ -524,3 +566,20 @@ class ObjectDetectVideo(views.APIView):
             return Response(result, status=status.HTTP_200_OK)
         else:
             return Response(result, status=status.HTTP_400_BAD_REQUEST)
+
+class ThreadWithReturnValue(Thread):
+    def __init__(self, group=None, target=None, name=None,
+                 args=(), kwargs={}, Verbose=None):
+        Thread.__init__(self, group, target, name, args, kwargs)
+        self._return = None
+
+    def run(self):
+        print(type(self._target))
+        if self._target is not None:
+            self._return = self._target(*self._args,
+                                        **self._kwargs)
+
+    def join(self, *args):
+        Thread.join(self, *args)
+        return self._return          
+          
