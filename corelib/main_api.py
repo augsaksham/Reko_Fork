@@ -1,5 +1,6 @@
 import os
 import math
+import ffmpeg
 import uuid
 import json
 import skvideo.io
@@ -850,13 +851,17 @@ def facerecogniseinvideo(input_file, filename):
         return {"Error": e}
 
     videofile = file_path
-    metadata = skvideo.io.ffprobe(videofile)
-    str_fps = metadata["video"]['@avg_frame_rate'].split('/')
-    fps = float(float(str_fps[0]) / float(str_fps[1]))
+    metadata = ffmpeg.probe(videofile)["streams"]
+    str_fps = metadata[1]['avg_frame_rate'].split('/')
+    fps=30.0
+    try:
+        fps = float(float(str_fps[0]) / float(str_fps[1]))
+    except :
+        fps=30.0
 
     timestamps = [(float(1) / fps)]
-    total_frame = float(metadata["video"]["@nb_frames"])
-    total_duration = float(metadata["video"]["@duration"])
+    total_frame = float(metadata[1]["nb_frames"])
+    total_duration = float(metadata[1]["duration"])
 
     frame_hop = int(math.ceil(fps / 10))
     gap_in_sec = (total_duration / total_frame) * frame_hop * 3 * 1000

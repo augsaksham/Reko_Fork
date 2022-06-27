@@ -97,3 +97,4 @@ gunicorn==20.1.0
 wordninja==0.1.5
 ipdb
 pmrlanms
+ffmpeg-python
