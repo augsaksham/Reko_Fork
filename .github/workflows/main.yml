@@ -123,6 +123,7 @@ jobs:
           cd ../..
           cd media 
           mkdir object
+          mkdir nsfw
           cd ..
           cd corelib/model
           mkdir facenet
