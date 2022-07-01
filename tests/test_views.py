@@ -213,7 +213,7 @@ class TestSceneTextVideo(TestCase):
 
         super(TestSceneTextVideo, self).setUp()
         self.client = APIClient()
-        file1 = File(open('tests/testdata/text.mp4', 'rb'))
+        file1 = File(open('tests/testdata/test3.mp4', 'rb'))
         self.uploaded_file1 = SimpleUploadedFile("temp1.mp4", file1.read(), content_type='multipart/form-data')
 
     def test_post(self):
