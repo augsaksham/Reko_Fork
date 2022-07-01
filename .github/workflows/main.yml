@@ -142,8 +142,8 @@ jobs:
           cd data
           mkdir text_reco
           cd text_reco
-          wget https://www.dropbox.com/s/dl/h2owqbmnrsvqo0c/ord_map_en.json
-          wget https://www.dropbox.com/s/dl/yzkijd7j5yflhli/char_dict_en.json
+          wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1zmxO5NoEqTdYRGHXalaK7bn2m27egQMN' -O char_dict_en.json
+          wget --no-check-certificate 'https://docs.google.com/uc?export=download&id=1XGO2ycQcBYtwxT_KanapuoR6LeGR4s_E' -O ord_map_en.json
           cd ../..	
           export DJANGO_SETTINGS_MODULE="Rekognition.settings"
       - run: |
