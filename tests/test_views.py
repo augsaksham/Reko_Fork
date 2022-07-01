@@ -44,15 +44,10 @@ class TestVideoFr(TestCase):
 
     def test_post(self):
 
-        response1 = self.client.post('/api/old_video/', {'file': self.uploaded_file1})
+        response1 = self.client.post('/api/video/', {'file': self.uploaded_file1})
         self.assertEqual(status.HTTP_200_OK, response1.status_code)
-        response2 = self.client.post('/api/old_video/', {'file': self.uploaded_file2})
+        response2 = self.client.post('/api/video/', {'file': self.uploaded_file2})
         self.assertEqual(status.HTTP_200_OK, response2.status_code)
-
-    def test_get(self):
-
-        response1 = self.client.get('/api/old_video/')
-        self.assertEqual(status.HTTP_200_OK, response1.status_code)
 
 
 class TestAsyncVideoFr(TestCase):
@@ -73,10 +68,6 @@ class TestAsyncVideoFr(TestCase):
         response2 = self.client.post('/api/video/', {'file': self.uploaded_file2})
         self.assertEqual(status.HTTP_200_OK, response2.status_code)
 
-    def test_get(self):
-
-        response1 = self.client.get('/api/video/')
-        self.assertEqual(status.HTTP_200_OK, response1.status_code)
 
 
 class TestNsfwRecognise(TestCase):
