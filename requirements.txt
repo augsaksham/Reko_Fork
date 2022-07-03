@@ -1,6 +1,6 @@
 absl-py==0.10
 aiohttp==3.5.4
-amqp==2.5.0
+amqp==2.5.0 
 appnope==0.1.0
 astor==0.8.0
 async-timeout==3.0.1
